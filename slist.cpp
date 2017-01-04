@@ -32,5 +32,3 @@ Class Library File
 // size()					//Returns the number of elements in this list.
 
 // subList(start, length)	//Returns a new list containing elements from a sub-range of this list.
-
-// toString()				//Converts the list to a printable string representation.

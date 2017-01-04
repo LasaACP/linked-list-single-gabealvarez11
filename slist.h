@@ -19,8 +19,6 @@ Header file for single linked list class library
 
 // isEmpty()				//Returns true if this list contains no elements.
 
-// mapAll(fn)				//Calls the specified function on each element of the linkedlist in ascending index order.
-
 // remove(index)			//Removes the element at the specified index from this list.
 
 // set(index, value)		//Replaces the element at the specified index in this list with a new value.
@@ -28,5 +26,3 @@ Header file for single linked list class library
 // size()					//Returns the number of elements in this list.
 
 // subList(start, length)	//Returns a new list containing elements from a sub-range of this list.
-
-// toString()				//Converts the list to a printable string representation.

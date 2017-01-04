@@ -134,6 +134,19 @@ double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d) {
 /*
 void simpleSortTotal()
 {
-
+	SALESREC* temp;
+	for (int i=0; i < c; i++)
+	{	
+		for (int j=i; j < c; j++)
+		{
+			if ((*s[i]).Total() < (*s[j]).Total())//total pointed at by i > total pointed at by j
+			{
+				//swap pointer to record I with pointer to record j
+				temp = s[i];
+				s[i] = s[j];
+				s[j] = temp;
+			}
+		}
+	}
 }
 */
