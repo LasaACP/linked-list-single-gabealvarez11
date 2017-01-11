@@ -1,17 +1,40 @@
 #include "slist.h"
-
 /*
 
 Class Library File
 
 */
 
-
 // Constructor
+template <class T>
+List<T>::List()
+{
+	Node x = new Node(0);
+	head = x;
+}
 
 // Destructor
+template <class T>
+List<T>::~List()
+{	
+	setCurrent(getHead());
+	
+	Node* temp = getCurrent();
+	
+	while(temp->next != 0) // check for errors
+	{
+		temp = getCurrent();
+		setCurrent(getCurrent()->pNext);
+		delete temp;
+	} 
+}
 
 // add(value)				//Adds a new value to the end of this list.
+template <class T>
+List<T>::add(T value)
+{
+	
+}
 
 // clear()					//Removes all elements from this list.
 

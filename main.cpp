@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath> 
+#include <stdlib.h>
 #include "slist.h"
 
 using namespace std;
@@ -88,7 +89,7 @@ int main()
 
    // Initialize Linked List
    
-   // 
+   List<Airport> x;
 
     
 }
