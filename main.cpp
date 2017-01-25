@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath> 
+#include <string>
 #include <stdlib.h>
 #include "slist.h"
 
@@ -25,7 +26,7 @@ public:
 
 
 
-void simpleSortTotal(Airport* s[], int c);
+void simpleSort(Airport* aus, int airportCount, Airport* airportArr[]);
 double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d);
 
 int main()
@@ -37,10 +38,11 @@ int main()
     int   airportCount;
     //Airport* a[13500];
     
-    infile.open ("./USAirportCodes.csv", ifstream::in);
+	infile.open ("./USAirportCodes.csv", ifstream::in);
+
     if (infile.is_open())
     {
-        int   c=0;
+		int   c=0;
         while (infile.good())
         {
             airportArr[c] = new Airport();
@@ -50,10 +52,10 @@ int main()
             infile.getline(cNum, 256, '\n');
             airportArr[c]->latitude = atof(cNum);
 
-            if (!(c % 1000))
+           /* if (!(c % 1000))
                 cout << airportArr[c]->code << " long: " << airportArr[c]->longitude << " lat: " << airportArr[c]->latitude <<  endl;
 
-            /*
+            
             if (!(c % 1000))
             {
                 cout << airportArr[c]->code << " long: " << airportArr[c]->longitude << " lat: " << airportArr[c]->latitude <<  endl;
@@ -68,30 +70,71 @@ int main()
         airportCount = c-1;
         infile.close();
         
-         for (int c=0; c < airportCount; c++)
+         /*for (int c=0; c < airportCount; c++)
             if (!(c % 1000))
             {
                 cout << airportArr[c]->code << " long: " << airportArr[c]->longitude << " lat: " << airportArr[c]->latitude <<  endl;
                 cout << airportArr[c+1]->code << " long: " << airportArr[c+1]->longitude << " lat: " << airportArr[c+1]->latitude <<  endl;
                 cout <<"Distance between " << airportArr[c]->code << " and " << airportArr[c+1]->code << " is "
                   << distanceEarth( airportArr[c]->longitude, airportArr[c]->latitude , airportArr[c+1]->longitude, airportArr[c+1]->latitude) << endl;
-            }
-
-
-
+            }*/
     }
     else
     {
         cout << "Error opening file";
     }
  
-
-
    // Initialize Linked List
    
-   List<Airport> x;
+   //List<Airport> a;
+   
+   cout << "Count: " << airportCount << endl;
+   
+   Airport* austin = airportArr[10655];
+   
+   cout << austin->code;
+   simpleSort(austin, airportCount, airportArr);
+   Airport* farthest;
+   
+    ofstream output;
+	output.open("sorted.csv");
+	Airport* a;
+	string write;
+	for(int z = 0; z < airportCount; z++)
+	{
+		a = airportArr[z];
+		output << "" << a->code << "," << a->latitude << "," << a->longitude << "," << distanceEarth(a->latitude, a->longitude, austin->latitude, austin->longitude) << "\n";
+	}
+   
+   output.close();
+   
+   //double farthestDis = 0;
+   double dis;
+   
+      double farthestDis = distanceEarth(airportArr[0]->latitude, airportArr[0]->longitude, austin->latitude, austin->longitude);
 
-    
+      cout << "Farthest Airport: " << airportArr[0]->code << " distance: " << farthestDis << endl;
+
+   for(int i = 1000; i < 13423; i++)
+   {
+	   dis = distanceEarth(airportArr[i]->latitude, airportArr[i]->longitude, austin->latitude, austin->longitude);
+	   if (dis < 100)
+	   {
+		   cout << airportArr[i]->code << " " << dis << endl;
+	   }
+	   
+	   if(dis > farthestDis)
+	   {
+		   cout << "!";
+		   farthest = airportArr[i];
+		   farthestDis = dis;
+	   }
+   }
+   
+   /*cout << endl << endl;
+   
+   cout << "Farthest Airport: " << farthest->code << " distance: " << farthestDis << endl;*/
+
 }
 
 
@@ -130,24 +173,21 @@ double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d) {
   return 2.0 * earthRadiusKm * asin(sqrt(u * u + cos(lat1r) * cos(lat2r) * v * v));
 }
 
-
-
-/*
-void simpleSortTotal()
+void simpleSort(Airport* aus, int airportCount, Airport* airportArr[])
 {
-	SALESREC* temp;
-	for (int i=0; i < c; i++)
+	Airport* temp;
+	for (int i=0; i < airportCount; i++)
 	{	
-		for (int j=i; j < c; j++)
+		for (int j=i; j < airportCount; j++)
 		{
-			if ((*s[i]).Total() < (*s[j]).Total())//total pointed at by i > total pointed at by j
+			if (distanceEarth(airportArr[i]->latitude, airportArr[i]->longitude, aus->latitude, aus->longitude) < distanceEarth(airportArr[j]->latitude, airportArr[j]->longitude, aus->latitude, aus->longitude))
+			//total pointed at by i > total pointed at by j
 			{
 				//swap pointer to record I with pointer to record j
-				temp = s[i];
-				s[i] = s[j];
-				s[j] = temp;
+				temp = airportArr[i];
+				airportArr[i] = airportArr[j];
+				airportArr[j] = temp;
 			}
 		}
 	}
 }
-*/

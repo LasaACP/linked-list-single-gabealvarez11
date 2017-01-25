@@ -4,8 +4,8 @@ Header file for single linked list class library
 
 */
 
-#ifndef __SLIST_H_INCLUDED__
-#define __SLIST_H_INCLUDED__
+#ifndef LIST_H
+#define SLIST_H
 
 //single linked list
 template <class T>
