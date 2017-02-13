@@ -27,7 +27,7 @@ class List {
 	public:
 		List();
 		
-		~List();
+		~List(); 
 		
 		Node* getHead() { return head; }
 		void setHead(Node* x) { head = x; }
